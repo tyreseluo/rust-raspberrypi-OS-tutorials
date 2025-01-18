@@ -92,14 +92,14 @@ EXEC_TEST_DISPATCH = ruby ../common/tests/dispatch.rb
 ##------------------------------------------------------------------------------
 ## Dockerization
 ##------------------------------------------------------------------------------
-DOCKER_CMD            = docker run -t --rm -v $(shell pwd):/work/tutorial -w /work/tutorial
-DOCKER_CMD_INTERACT   = $(DOCKER_CMD) -i
-DOCKER_ARG_DIR_COMMON = -v $(shell pwd)/../common:/work/common
+# DOCKER_CMD            = docker run -t --rm -v $(shell pwd):/work/tutorial -w /work/tutorial
+# DOCKER_CMD_INTERACT   = $(DOCKER_CMD) -i
+# DOCKER_ARG_DIR_COMMON = -v $(shell pwd)/../common:/work/common
 
-# DOCKER_IMAGE defined in include file (see top of this file).
-DOCKER_QEMU  = $(DOCKER_CMD_INTERACT) $(DOCKER_IMAGE)
-DOCKER_TOOLS = $(DOCKER_CMD) $(DOCKER_IMAGE)
-DOCKER_TEST  = $(DOCKER_CMD) $(DOCKER_ARG_DIR_COMMON) $(DOCKER_IMAGE)
+# # DOCKER_IMAGE defined in include file (see top of this file).
+# DOCKER_QEMU  = $(DOCKER_CMD_INTERACT) $(DOCKER_IMAGE)
+# DOCKER_TOOLS = $(DOCKER_CMD) $(DOCKER_IMAGE)
+# DOCKER_TEST  = $(DOCKER_CMD) $(DOCKER_ARG_DIR_COMMON) $(DOCKER_IMAGE)
 
 
 
@@ -155,7 +155,7 @@ else # QEMU is supported.
 
 qemu: $(KERNEL_BIN)
 	$(call color_header, "Launching QEMU")
-	@$(DOCKER_QEMU) $(EXEC_QEMU) $(QEMU_RELEASE_ARGS) -kernel $(KERNEL_BIN)
+	@$(EXEC_QEMU) $(QEMU_RELEASE_ARGS) -M raspi3b -kernel $(KERNEL_BIN)
 endif
 
 ##------------------------------------------------------------------------------
